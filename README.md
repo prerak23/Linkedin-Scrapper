@@ -52,7 +52,7 @@ Minimal — search with defaults (mid/senior, last 24h, 2 pages):
 ```bash
 python linkedin_scrapper.py \
   --cities "Mumbai" "Bengaluru" \
-  --keywords "Data Scientist" "Research Engineer"
+  --keywords "DevOps" "Research Engineer"
 ```
 
 Full example with all filters:
@@ -60,7 +60,7 @@ Full example with all filters:
 ```bash
 python linkedin_scrapper.py \
   --cities "Paris" "Bengaluru" "Dublin" \
-  --keywords "Data Scientist" "Machine Learning Engineer" \
+  --keywords "DevOps" "Machine Learning Engineer" \
   --experience entry mid senior \
   --time-range week \
   --max-pages 3
@@ -71,7 +71,7 @@ Single city, internship search:
 ```bash
 python linkedin_scrapper.py \
   --cities "Singapore" \
-  --keywords "Computer Vision" "Deep Learning" \
+  --keywords "Security Architect" "Cyber Security" \
   --experience internship entry \
   --time-range month \
   --max-pages 1
