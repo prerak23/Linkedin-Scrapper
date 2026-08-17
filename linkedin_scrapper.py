@@ -69,12 +69,12 @@ TIME_RANGES = {
 
 
 def build_url(keyword: str, geo_id: str, experience: list[str], time_range: str, start: int = 0) -> str:
-    encoded = keyword.replace(" ", "%20")
+    encoded = "%22" + keyword.replace(" ", "%20") + "%22"
     exp_param = ",".join(EXPERIENCE_LEVELS[e] for e in experience)
     tpr_param = TIME_RANGES[time_range]
     return (
         f"https://www.linkedin.com/jobs/search/"
-        f'?f_TPR={tpr_param}&f_E={exp_param}&geoId={geo_id}&keywords="{encoded}"'
+        f"?f_TPR={tpr_param}&f_E={exp_param}&geoId={geo_id}&keywords={encoded}"
         f"&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true&start={start}"
     )
 
@@ -106,17 +106,28 @@ def parse_jobs(html: str, keyword: str, geo_id: str) -> list[dict]:
                 "posted_time": extract_text(time_el),
                 "keyword": keyword,
                 "geo_id": geo_id,
-                "job_linkedin": links[0].get("href"),
+                "job_linkedin": links[0].get("href", "").split("?")[0] or None,
             }
         )
     return jobs
+
+
+def extract_job_id(url: str | None) -> str | None:
+    # LinkedIn job URLs look like: /jobs/view/1234567890/?refId=...
+    if not url:
+        return None
+    for part in url.split("/"):
+        if part.isdigit():
+            return part
+    return None
 
 
 def deduplicate(jobs: list[dict]) -> list[dict]:
     seen = set()
     unique = []
     for job in jobs:
-        key = (job.get("job_linkedin") or job.get("position"), job.get("company"))
+        job_id = extract_job_id(job.get("job_linkedin"))
+        key = job_id or (job.get("position"), job.get("company"))
         if key not in seen:
             seen.add(key)
             unique.append(job)
