@@ -51,7 +51,7 @@ Minimal — search with defaults (mid/senior, last 24h, 2 pages):
 
 ```bash
 python linkedin_scrapper.py \
-  --cities "Paris" "London" \
+  --cities "Mumbai" "Bengaluru" \
   --keywords "Data Scientist" "Research Engineer"
 ```
 
@@ -59,7 +59,7 @@ Full example with all filters:
 
 ```bash
 python linkedin_scrapper.py \
-  --cities "Paris" "London" "Berlin" \
+  --cities "Paris" "Bengaluru" "Dublin" \
   --keywords "Data Scientist" "Machine Learning Engineer" \
   --experience entry mid senior \
   --time-range week \
