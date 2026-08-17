@@ -59,7 +59,7 @@ Full example with all filters:
 
 ```bash
 python linkedin_scrapper.py \
-  --cities "Paris" "Bengaluru" "Dublin" \
+  --cities "San Francisco" "Bengaluru" "Dublin" \
   --keywords "DevOps" "Machine Learning Engineer" \
   --experience entry mid senior \
   --time-range week \
@@ -70,7 +70,7 @@ Single city, internship search:
 
 ```bash
 python linkedin_scrapper.py \
-  --cities "Singapore" \
+  --cities "Hyderabad" \
   --keywords "Security Architect" "Cyber Security" \
   --experience internship entry \
   --time-range month \
